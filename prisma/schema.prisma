@@ -1,0 +1,84 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Vendor {
+  id          Int     @id @default(autoincrement())
+  name        String
+  vendorType  String
+  clerkUserId String
+  rabdis      Rabdi[]
+  milks       Milk[]
+  gases       Gas[]
+}
+
+model Rabdi {
+  id              Int      @id @default(autoincrement())
+  clerkUserId     String
+  date            DateTime
+  quantity        Float
+  amountDeposited Float    @default(0.0)
+  vendorId        Int
+  vendor          Vendor   @relation(fields: [vendorId], references: [id])
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+}
+
+model Milk {
+  id              Int      @id @default(autoincrement())
+  clerkUserId     String
+  date            DateTime
+  milkType        String
+  quantity        Float
+  amountDeposited Float    @default(0.0)
+  vendorId        Int
+  vendor          Vendor   @relation(fields: [vendorId], references: [id])
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+}
+
+model Gas {
+  id          Int      @id @default(autoincrement())
+  clerkUserId String
+  date        DateTime
+  quantity    Float
+  rate        Float
+  vendorId    Int
+  vendor      Vendor   @relation(fields: [vendorId], references: [id])
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Bill {
+  id                  Int      @id @default(autoincrement())
+  clerkUserId         String
+  startDate           DateTime
+  endDate             DateTime
+  totalRabdi          Float
+  rabdiBill           Float
+  totalMilk           Float
+  totalMilkFat        Float
+  totalMilkWithoutFat Float
+  milkFatBill         Float
+  milkWithoutFatBill  Float
+  totalMilkBill       Float    @default(0.0)
+  totalGas            Float
+  gasBill             Float
+  createdAt           DateTime @default(now())
+}
+
+model customer {
+  id                 Int      @id @default(autoincrement())
+  name               String
+  Date               DateTime
+  milkAmountMorning  Float
+  milkAmountEveneing Float
+  dahiAmount         Float
+  paneerAmount       Float
+}
