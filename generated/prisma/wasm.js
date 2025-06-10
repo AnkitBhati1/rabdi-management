@@ -114,6 +114,9 @@ Prisma.NullTypes = {
  */
 
 exports.Prisma.TransactionIsolationLevel = makeStrictEnum({
+  ReadUncommitted: 'ReadUncommitted',
+  ReadCommitted: 'ReadCommitted',
+  RepeatableRead: 'RepeatableRead',
   Serializable: 'Serializable'
 });
 
@@ -176,9 +179,24 @@ exports.Prisma.BillScalarFieldEnum = {
   createdAt: 'createdAt'
 };
 
+exports.Prisma.CustomerScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  Date: 'Date',
+  milkAmountMorning: 'milkAmountMorning',
+  milkAmountEveneing: 'milkAmountEveneing',
+  dahiAmount: 'dahiAmount',
+  paneerAmount: 'paneerAmount'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
+};
+
+exports.Prisma.QueryMode = {
+  default: 'default',
+  insensitive: 'insensitive'
 };
 
 
@@ -187,7 +205,8 @@ exports.Prisma.ModelName = {
   Rabdi: 'Rabdi',
   Milk: 'Milk',
   Gas: 'Gas',
-  Bill: 'Bill'
+  Bill: 'Bill',
+  customer: 'customer'
 };
 
 /**

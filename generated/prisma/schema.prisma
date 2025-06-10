@@ -4,8 +4,9 @@ generator client {
 }
 
 datasource db {
-  provider = "sqlite"
-  url      = env("DATABASE_URL")
+  provider  = "postgresql"
+  url       = env("POSTGRES_PRISMA_URL") // uses connection pooling
+  directUrl = env("POSTGRES_URL_NON_POOLING") // uses a direct connection
 }
 
 model Vendor {
@@ -71,4 +72,14 @@ model Bill {
   totalGas            Float
   gasBill             Float
   createdAt           DateTime @default(now())
+}
+
+model customer {
+  id                 Int      @id @default(autoincrement())
+  name               String
+  Date               DateTime
+  milkAmountMorning  Float
+  milkAmountEveneing Float
+  dahiAmount         Float
+  paneerAmount       Float
 }
